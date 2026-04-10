@@ -5,169 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Vantage Colombia | Soluciones Digitales</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Segoe UI', 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #050a07;
-            color: #e8f5ec;
+            color: #cbcbcb;
             line-height: 1.5;
             overflow-x: hidden;
         }
-
         :root {
             --green: #0d9f4c;
             --green-light: #14cc63;
             --green-dark: #0a7a3a;
-            --green-glow: rgba(13, 159, 76, 0.25);
+            --green-glow: rgba(13,159,76,0.25);
             --bg: #050a07;
             --surface: #0c1610;
             --text: #e8f5ec;
             --text-dim: #7faa8f;
         }
-
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--green-dark); border-radius: 3px; }
 
-        /* ========== ANIMACIONES ========== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeInUp    { from { opacity:0; transform:translateY(60px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeInLeft  { from { opacity:0; transform:translateX(-60px);} to { opacity:1; transform:translateX(0); } }
+        @keyframes fadeInRight { from { opacity:0; transform:translateX(60px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes scaleIn     { from { opacity:0; transform:scale(0.8); }       to { opacity:1; transform:scale(1); }    }
+        @keyframes glowPulse   { 0%,100%{ text-shadow:0 0 10px rgba(13,159,76,0.3); } 50%{ text-shadow:0 0 30px rgba(13,159,76,0.8); } }
+        @keyframes borderPulse { 0%,100%{ border-color:rgba(13,159,76,0.15); } 50%{ border-color:rgba(13,159,76,0.5); } }
+        @keyframes float       { 0%,100%{ transform:translateY(0); }    50%{ transform:translateY(-10px); } }
+        @keyframes shimmer     { 0%{ background-position:-200% 0; }    100%{ background-position:200% 0; } }
+        @keyframes marquee     { 0%{ transform:translateX(0); }        100%{ transform:translateX(-50%); } }
 
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+        .animate-up    { animation: fadeInUp    0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-left  { animation: fadeInLeft  0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-right { animation: fadeInRight 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-scale { animation: scaleIn     0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .delay-100 { animation-delay:0.1s; }
+        .delay-150 { animation-delay:0.15s; }
+        .delay-200 { animation-delay:0.2s; }
+        .delay-250 { animation-delay:0.25s; }
+        .delay-300 { animation-delay:0.3s; }
+        .delay-350 { animation-delay:0.35s; }
+        .delay-400 { animation-delay:0.4s; }
+        .delay-500 { animation-delay:0.5s; }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(13, 159, 76, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(13, 159, 76, 0.8);
-            }
-        }
-
-        @keyframes borderPulse {
-            0%, 100% {
-                border-color: rgba(13, 159, 76, 0.15);
-            }
-            50% {
-                border-color: rgba(13, 159, 76, 0.5);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                background-position: -200% 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
-        }
-
-        @keyframes particleFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(0) scale(0);
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-200px) scale(1);
-            }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Clases de animación */
-        .animate-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-left {
-            animation: fadeInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-right {
-            animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-scale {
-            animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-
-        /* Componentes */
         .shimmer-text {
             background: linear-gradient(90deg, var(--green), var(--green-light), #06d6a0, var(--green));
             background-size: 200% auto;
@@ -177,399 +61,198 @@
             animation: shimmer 4s linear infinite;
         }
 
-        .glow-text {
-            animation: glowPulse 3s ease-in-out infinite;
-        }
-
-        /* NAVBAR - FIXED Y FUNCIONAL */
+        /* ── NAVBAR ── */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
+            position: fixed; top:0; left:0; width:100%; z-index:1000;
             padding: 1rem 2rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
             background: transparent;
         }
-
         .navbar.scrolled {
-            background: rgba(5, 10, 7, 0.95);
+            background: rgba(5,10,7,0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(13, 159, 76, 0.2);
+            border-bottom: 1px solid rgba(13,159,76,0.2);
             padding: 0.75rem 2rem;
         }
-
         .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            max-width: 1280px; margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--green), var(--green-light));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.25rem;
-            color: white;
-            box-shadow: 0 0 20px rgba(13, 159, 76, 0.3);
-        }
-        .logo-text {
-            font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: -0.02em;
-            color: var(--green);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
+        .logo { display:flex; align-items:center; gap:0.75rem; cursor:pointer; transition:transform 0.3s ease; }
+        .logo:hover { transform:scale(1.05); }
+        .logo img { width:100px; height:auto; object-fit:contain; }
+        .nav-links { display:flex; align-items:center; gap:2rem; }
         .nav-links a {
-            text-decoration: none;
-            color: #9ca3af;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
+            text-decoration:none; color:#9ca3af; font-size:0.875rem; font-weight:500;
+            transition:all 0.3s ease; position:relative;
         }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--green);
-            transition: width 0.3s ease;
+            content:''; position:absolute; bottom:-5px; left:0;
+            width:0; height:2px; background:var(--green); transition:width 0.3s ease;
         }
-        .nav-links a:hover {
-            color: white;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
+        .nav-links a:hover { color:white; }
+        .nav-links a:hover::after { width:100%; }
         .nav-btn {
-            background: var(--green);
-            padding: 0.5rem 1.25rem;
-            border-radius: 9999px;
-            color: white !important;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background:var(--green); padding:0.5rem 1.25rem;
+            border-radius:9999px; color:white !important; font-weight:600;
+            transition:all 0.3s ease;
         }
-        .nav-btn:hover {
-            background: var(--green-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px var(--green-glow);
-        }
-        .nav-btn::after {
-            display: none;
-        }
-
+        .nav-btn:hover { background:var(--green-light); transform:translateY(-2px); box-shadow:0 4px 15px var(--green-glow); }
+        .nav-btn::after { display:none; }
         .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.75rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            display:none; background:none; border:none;
+            color:white; font-size:1.75rem; cursor:pointer; transition:transform 0.3s ease;
         }
-        .menu-btn:hover {
-            transform: scale(1.1);
-        }
+        .menu-btn:hover { transform:scale(1.1); }
 
-        /* Mobile Menu */
+        /* ── MOBILE MENU ── */
         .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            max-width: 320px;
-            height: 100vh;
-            background: rgba(5, 10, 7, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 1001;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            padding: 5rem 2rem 2rem;
-            gap: 1.5rem;
-            border-left: 1px solid rgba(13, 159, 76, 0.2);
+            position:fixed; top:0; right:0; width:min(320px, 85vw); height:100vh;
+            background:rgba(5,10,7,0.98); backdrop-filter:blur(20px);
+            z-index:1001; transform:translateX(100%);
+            transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            display:flex; flex-direction:column;
+            padding:5rem 2rem 2rem; gap:1.5rem;
+            border-left:1px solid rgba(13,159,76,0.2);
         }
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
+        .mobile-menu.open { transform:translateX(0); }
         .mobile-menu a {
-            text-decoration: none;
-            color: #d1d5db;
-            font-size: 1.125rem;
-            font-weight: 500;
-            padding: 0.75rem 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            text-decoration:none; color:#d1d5db; font-size:1.125rem; font-weight:500;
+            padding:0.75rem 0; transition:all 0.3s ease;
+            border-bottom:1px solid rgba(255,255,255,0.05);
         }
-        .mobile-menu a:hover {
-            color: var(--green);
-            padding-left: 0.5rem;
-        }
+        .mobile-menu a:hover { color:var(--green); padding-left:0.5rem; }
         .close-menu {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.75rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            position:absolute; top:1.5rem; right:1.5rem;
+            background:none; border:none; color:white; font-size:1.75rem;
+            cursor:pointer; transition:transform 0.3s ease;
         }
-        .close-menu:hover {
-            transform: rotate(90deg);
-            color: var(--green);
-        }
+        .close-menu:hover { transform:rotate(90deg); color:var(--green); }
         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.5); z-index:1000;
+            opacity:0; visibility:hidden; transition:all 0.3s ease;
         }
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .overlay.active { opacity:1; visibility:visible; }
 
-        /* Botones */
+        /* ── BUTTONS ── */
         .btn-primary {
-            background: var(--green);
-            padding: 1rem 2rem;
-            border-radius: 9999px;
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            border: none;
-            cursor: pointer;
+            background:var(--green); padding:1rem 2rem; border-radius:9999px;
+            color:white; font-weight:600; text-decoration:none;
+            display:inline-block; transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+            border:none; cursor:pointer;
         }
-        .btn-primary:hover {
-            background: var(--green-light);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px var(--green-glow);
-        }
-
+        .btn-primary:hover { background:var(--green-light); transform:translateY(-3px); box-shadow:0 10px 30px var(--green-glow); }
         .btn-outline {
-            padding: 1rem 2rem;
-            border-radius: 9999px;
-            border: 1px solid #374151;
-            color: #9ca3af;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            background: transparent;
-            cursor: pointer;
+            padding:1rem 2rem; border-radius:9999px;
+            border:1px solid #374151; color:#9ca3af; font-weight:500;
+            text-decoration:none; display:inline-block;
+            transition:all 0.3s ease; background:transparent; cursor:pointer;
         }
-        .btn-outline:hover {
-            border-color: var(--green);
-            color: white;
-            transform: translateY(-3px);
-        }
+        .btn-outline:hover { border-color:var(--green); color:white; transform:translateY(-3px); }
 
-        /* Cards */
+        /* ── CARDS ── */
         .service-card, .pricing-card, .why-card, .stat-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .service-card:hover, .pricing-card:hover, .why-card:hover, .stat-card:hover {
-            transform: translateY(-8px);
-        }
+        .service-card { background:var(--surface); border:1px solid rgba(13,159,76,0.1); border-radius:1rem; padding:1.75rem; }
+        .service-card:hover { transform:translateY(-8px); border-color:rgba(13,159,76,0.4); box-shadow:0 20px 40px rgba(13,159,76,0.1); }
+        .pricing-card { background:var(--surface); border:1px solid rgba(13,159,76,0.1); border-radius:1rem; padding:2rem; }
+        .pricing-card.featured { border-color:var(--green); animation:borderPulse 3s ease-in-out infinite; }
+        .pricing-card:hover { transform:translateY(-10px); box-shadow:0 25px 50px rgba(13,159,76,0.15); }
+        .why-card { background:var(--surface); border:1px solid rgba(13,159,76,0.08); border-radius:1.25rem; padding:2rem; text-align:center; }
+        .why-card:hover { transform:translateY(-8px); border-color:rgba(13,159,76,0.3); box-shadow:0 15px 40px rgba(13,159,76,0.08); }
+        .stat-card { background:var(--surface); border:1px solid rgba(13,159,76,0.08); border-radius:1rem; padding:1.5rem; text-align:center; }
+        .stat-card:hover { transform:translateY(-8px); border-color:var(--green); }
 
-        .service-card {
-            background: var(--surface);
-            border: 1px solid rgba(13, 159, 76, 0.1);
-            border-radius: 1rem;
-            padding: 1.75rem;
-        }
-        .service-card:hover {
-            border-color: rgba(13, 159, 76, 0.4);
-            box-shadow: 0 20px 40px rgba(13, 159, 76, 0.1);
-        }
-
-        .pricing-card {
-            background: var(--surface);
-            border: 1px solid rgba(13, 159, 76, 0.1);
-            border-radius: 1rem;
-            padding: 2rem;
-        }
-        .pricing-card.featured {
-            border-color: var(--green);
-            animation: borderPulse 3s ease-in-out infinite;
-        }
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(13, 159, 76, 0.15);
-        }
-
-        .why-card {
-            background: var(--surface);
-            border: 1px solid rgba(13, 159, 76, 0.08);
-            border-radius: 1.25rem;
-            padding: 2rem;
-            text-align: center;
-        }
-        .why-card:hover {
-            border-color: rgba(13, 159, 76, 0.3);
-            box-shadow: 0 15px 40px rgba(13, 159, 76, 0.08);
-        }
-
-        .stat-card {
-            background: var(--surface);
-            border: 1px solid rgba(13, 159, 76, 0.08);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        .stat-card:hover {
-            border-color: var(--green);
-        }
-
-        /* Process Steps */
+        /* ── PROCESS ── */
         .process-step {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
+            position:relative; padding-left:60px;
+            margin-bottom:2rem; transition:all 0.3s ease;
         }
         .process-step::before {
             content: attr(data-step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--surface);
-            border: 2px solid var(--green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: monospace;
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--green);
-            transition: all 0.4s ease;
+            position:absolute; left:0; top:0;
+            width:44px; height:44px; border-radius:50%;
+            background:var(--surface); border:2px solid var(--green);
+            display:flex; align-items:center; justify-content:center;
+            font-family:monospace; font-size:1rem; font-weight:bold;
+            color:var(--green); line-height:1;
+            transition:all 0.4s ease;
         }
         .process-step:hover::before {
-            background: var(--green);
-            color: var(--bg);
-            transform: scale(1.15);
-            box-shadow: 0 0 20px var(--green-glow);
+            background:var(--green); color:var(--bg);
+            transform:scale(1.15); box-shadow:0 0 20px var(--green-glow);
         }
 
-        /* Elementos decorativos */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-        }
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--green);
-            opacity: 0.1;
-            top: 10%;
-            left: 10%;
-            animation: float 18s ease-in-out infinite;
-        }
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: #06d6a0;
-            opacity: 0.08;
-            bottom: 10%;
-            right: 10%;
-            animation: float 22s ease-in-out infinite reverse;
+        /* ── ORBS ── */
+        .orb { position:fixed; border-radius:50%; filter:blur(80px); pointer-events:none; z-index:-1; }
+        .orb-1 { width:400px; height:400px; background:var(--green); opacity:0.08; top:10%; left:5%; animation:float 18s ease-in-out infinite; }
+        .orb-2 { width:300px; height:300px; background:#06d6a0; opacity:0.06; bottom:10%; right:5%; animation:float 22s ease-in-out infinite reverse; }
+
+        .section-divider { height:1px; background:linear-gradient(90deg,transparent,var(--green),transparent); opacity:0.15; }
+
+        /* ── SECTION WRAPPER ── */
+        .section-inner { max-width:1024px; margin:0 auto; }
+        .section-inner-sm { max-width:896px; margin:0 auto; }
+
+        /* ── GRIDS ── */
+        .grid-stats    { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1rem; }
+        .grid-why      { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; }
+        .grid-services { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; }
+        .grid-pricing  { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+        .grid-contact  { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .grid-leaders  { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+
+        /* ── CONTACT LINKS ── */
+        .contact-links { display:flex; flex-direction:column; gap:0.75rem; align-items:center; }
+        .contact-links a.btn-primary {
+            display:flex; justify-content:center; align-items:center; gap:0.5rem;
+            padding:0.65rem 1.25rem; font-size:0.85rem;
+            border-radius:0.5rem; width:100%; max-width:260px;
+            text-decoration:none;
         }
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--green), transparent);
-            opacity: 0.15;
-            margin: 0;
-        }
+        /* ── HERO BUTTONS ── */
+        .hero-btns { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
 
-        /* Responsive */
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 0.75rem 1rem;
-            }
-            .navbar.scrolled {
-                padding: 0.5rem 1rem;
-            }
-            .nav-links {
-                display: none;
-            }
-            .menu-btn {
-                display: block;
-            }
-            .orb {
-                display: none;
-            }
-            .service-card, .pricing-card, .why-card {
-                padding: 1.25rem;
-            }
+            .navbar { padding:0.75rem 1rem; }
+            .navbar.scrolled { padding:0.5rem 1rem; }
+            .nav-links { display:none; }
+            .menu-btn { display:block; }
+            .orb { display:none; }
+            .service-card, .pricing-card, .why-card { padding:1.25rem; }
+            .process-step { padding-left:50px; }
+            .contact-links a.btn-primary { max-width:100%; }
+            .grid-why, .grid-services, .grid-pricing { grid-template-columns:1fr; }
+            .grid-leaders { grid-template-columns:1fr; }
         }
-
         @media (min-width: 769px) {
-            .mobile-menu, .overlay {
-                display: none;
-            }
+            .mobile-menu, .overlay { display:none !important; }
+        }
+        @media (max-width: 480px) {
+            .hero-btns { flex-direction:column; align-items:center; }
+            .hero-btns .btn-primary, .hero-btns .btn-outline { width:100%; max-width:280px; text-align:center; }
+            .grid-stats { grid-template-columns:repeat(2,1fr); }
         }
     </style>
 </head>
 <body>
+  <div class="fondo">
+    <img src="./fondo.svg" style="height: 100vh; width: 120vw; position: absolute; top: 0; left: 0; z-index: -1;" alt="Fondo">
+  
 
-    <!-- Elementos decorativos -->
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
-
-    <!-- Overlay para mobile -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- NAVBAR FIXED MEJORADO -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo" onclick="window.location.href='#inicio'">
-    
-                  <img style=" width: 100px; height: 100%; object-fit: contain;" src="https://vantagecolombia.github.io/Vantage/logo.png" alt="">
-            
+                <img src="./logo.png" alt="Vantage Colombia">
             </div>
             <div class="nav-links">
                 <a href="#inicio">Inicio</a>
@@ -578,13 +261,13 @@
                 <a href="#planes">Planes</a>
                 <a href="#contacto" class="nav-btn">Contacto</a>
             </div>
-            <button class="menu-btn" id="menuBtn">☰</button>
+            <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
+    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
-        <button class="close-menu" id="closeMenu">✕</button>
+        <button class="close-menu" id="closeMenu" aria-label="Cerrar menú">✕</button>
         <a href="#inicio">Inicio</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#servicios">Servicios</a>
@@ -592,68 +275,80 @@
         <a href="#contacto">Contacto</a>
     </div>
 
-    <!-- HERO SECTION -->
-    <section id="inicio" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 4rem; position: relative;">
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div class="animate-scale" style="margin-bottom: 2rem;">
-                <div style="width: 120px; height: 120px; background: linear-gradient(135deg, var(--green), var(--green-light)); border-radius: 32px; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; box-shadow: 0 0 50px rgba(13, 159, 76, 0.4); animation: float 4s ease-in-out infinite;">
-                  <div>
-                    <img style="padding-top: 15px; width: 90px;" src="./log.png" alt="">
-                  </div>
+    <!-- HERO -->
+    <section id="inicio" style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:6rem 1.5rem 4rem; position:relative;">
+        <div style="max-width:900px; margin:0 auto;">
+            <div class="animate-scale" style="margin-bottom:2rem;">
+                <div style="width:120px; height:120px; background:linear-gradient(135deg,var(--green),var(--green-light)); border-radius:32px; margin:0 auto; display:flex; align-items:center; justify-content:center; box-shadow:0 0 50px rgba(13,159,76,0.4); animation:float 4s ease-in-out infinite; overflow:hidden;">
+                    <img src="./log.png" alt="Logo" style="width:90px; height:auto; padding-top:8px; object-fit:contain;">
                 </div>
             </div>
-            <div style="width: 120px; height: 2px; background: linear-gradient(90deg, var(--green), transparent); margin: 0 auto 1.5rem auto;"></div>
-            <h1 class="animate-up delay-100" style="font-size: clamp(2rem, 8vw, 4.5rem); font-weight: 900; letter-spacing: -0.02em; margin-bottom: 1rem;">Soluciones Digitales<br><span class="shimmer-text">que Impulsan</span></h1>
-            <p class="animate-up delay-200" style="font-size: clamp(1rem, 4vw, 1.25rem); color: var(--text-dim); max-width: 550px; margin: 0 auto 2rem auto;">Creamos el futuro digital de tu negocio con tecnología, diseño y pasión estudiantil.</p>
-            <div class="animate-up delay-300" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+            <div style="width:120px; height:2px; background:linear-gradient(90deg,var(--green),transparent); margin:0 auto 1.5rem;"></div>
+            <h1 class="animate-up delay-2 00" style="font-size:clamp(1.9rem,7vw,4.5rem); font-weight:900; letter-spacing:-0.02em; margin-bottom:1rem; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); line-height:1.1; max-width:800px; margin-left:auto; margin-right:auto;">
+                Soluciones Digitales<br><span class="shimmer-text">que Impulsan</span>
+            </h1>
+            <p class="animate-up delay-200" style="font-size:clamp(0.95rem,3.5vw,1.25rem); color:var(--text-dim); max-width:550px; margin:0 auto 2rem;">
+                Creamos el futuro digital de tu negocio con tecnología, diseño y pasión estudiantil.
+            </p>
+            <div class="hero-btns animate-up delay-300">
                 <a href="#contacto" class="btn-primary">Contáctanos →</a>
                 <a href="#servicios" class="btn-outline">Ver servicios</a>
             </div>
         </div>
-        <br><br><br>
-        <div class="animate-up delay-500" style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);">Scroll</span>
-            <div style="width: 1px; height: 50px; background: linear-gradient(to bottom, var(--green), transparent);"></div>
+        <div class="animate-up delay-500" style="position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+            <span style="font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim);">Scroll</span>
+            <div style="width:1px; height:50px; background:linear-gradient(to bottom,var(--green),transparent);"></div>
         </div>
     </section>
+    </div>
 
     <!-- MARQUEE -->
-    <div style="padding: 1rem 0; overflow: hidden; border-top: 1px solid rgba(13, 159, 76, 0.1); border-bottom: 1px solid rgba(13, 159, 76, 0.1);">
-        <div style="display: flex; animation: marquee 25s linear infinite; width: max-content;" id="marquee">
-            <span style="display: flex; gap: 3rem; padding: 0 1.5rem; font-size: 0.8rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">
+    <div style="padding:1rem 0; overflow:hidden; border-top:1px solid rgba(13,159,76,0.1); border-bottom:1px solid rgba(13,159,76,0.1);">
+        <div style="display:flex; animation:marquee 25s linear infinite; width:max-content;" id="marquee">
+            <span style="display:flex; gap:3rem; padding:0 1.5rem; font-size:0.8rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); white-space:nowrap;">
                 <span>● Web Development</span><span>● Mobile Apps</span><span>● UX/UI Design</span><span>● Automation</span><span>● Digital Catalogs</span><span>● Data Analysis</span>
             </span>
         </div>
     </div>
 
     <!-- NOSOTROS -->
-    <section id="nosotros" style="padding: 5rem 1.5rem;">
-        <div style="max-width: 1024px; margin: 0 auto;">
-            <div class="animate-left"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Quiénes somos</span></div>
-            <h2 class="animate-left delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 1.5rem; max-width: 700px;">Estudiantes creando<br><span class="shimmer-text">soluciones reales</span></h2>
-            <p class="animate-left delay-200" style="font-size: clamp(1rem, 4vw, 1.125rem); line-height: 1.6; color: var(--text-dim); max-width: 650px; margin-bottom: 3rem;">Somos un equipo de desarrollo conformado por estudiantes que crean soluciones reales en software, páginas web y aplicaciones móviles. Nuestro objetivo es ayudar a negocios a crecer en internet mientras apoyamos económicamente a estudiantes.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-                <div class="stat-card animate-scale delay-100"><div style="font-size: 2rem; font-weight: 900; color: var(--green);">6h</div><div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Entrega mínima</div></div>
-                <div class="stat-card animate-scale delay-200"><div style="font-size: 2rem; font-weight: 900; color: var(--green);">100%</div><div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Funcional</div></div>
-                <div class="stat-card animate-scale delay-300"><div style="font-size: 2rem; font-weight: 900; color: var(--green);">24/7</div><div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Soporte</div></div>
-                <div class="stat-card animate-scale delay-400"><div style="font-size: 2rem; font-weight: 900; color: var(--green);">$170k</div><div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Desde</div></div>
+     <
+    <section id="nosotros" style="padding:5rem 1.5rem;">
+      
+  
+        <div class="section-inner">
+            <div class="animate-left"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Quiénes somos</span></div>
+            <h2 class="animate-left delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 1.5rem; max-width:700px;">
+                Estudiantes creando<br><span class="shimmer-text">soluciones reales</span>
+            </h2>
+            <p class="animate-left delay-200" style="font-size:clamp(0.95rem,3vw,1.125rem); line-height:1.7; color:var(--text-dim); max-width:650px; margin-bottom:3rem;">
+                Somos un equipo de desarrollo conformado por estudiantes que crean soluciones reales en software, páginas web y aplicaciones móviles. Nuestro objetivo es ayudar a negocios a crecer en internet mientras apoyamos económicamente a estudiantes.
+            </p>
+            <div class="grid-stats">
+                <div class="stat-card animate-scale delay-100"><div style="font-size:2rem; font-weight:900; color:var(--green);">6h</div><div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Entrega mínima</div></div>
+                <div class="stat-card animate-scale delay-200"><div style="font-size:2rem; font-weight:900; color:var(--green);">100%</div><div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Funcional</div></div>
+                <div class="stat-card animate-scale delay-300"><div style="font-size:2rem; font-weight:900; color:var(--green);">24/7</div><div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Soporte</div></div>
+                <div class="stat-card animate-scale delay-400"><div style="font-size:2rem; font-weight:900; color:var(--green);">$170k</div><div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Desde</div></div>
             </div>
         </div>
+        
     </section>
+    
 
     <div class="section-divider"></div>
 
     <!-- POR QUÉ ELEGIRNOS -->
-    <section style="padding: 5rem 1.5rem;">
-        <div style="max-width: 1024px; margin: 0 auto;">
-            <div class="animate-right"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Por qué elegirnos</span></div>
-            <h2 class="animate-right delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 2rem;">Tu mejor opción<br>para <span class="shimmer-text">crecer digital</span></h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                <div class="why-card animate-scale delay-100"><div style="font-size: 2.5rem; margin-bottom: 1rem;">💰</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Precios Accesibles</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Soluciones profesionales al alcance de cualquier negocio. Desde $170.000 COP.</p></div>
-                <div class="why-card animate-scale delay-200"><div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Atención Personalizada</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Cada proyecto es único. Te acompañamos en cada paso del proceso.</p></div>
-                <div class="why-card animate-scale delay-300"><div style="font-size: 2.5rem; margin-bottom: 1rem;">👨‍💻</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Equipo Multidisciplinario</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Desarrolladores, diseñadores y analistas trabajando juntos.</p></div>
-                <div class="why-card animate-scale delay-400"><div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Soluciones Reales</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Entregamos productos funcionales listos para producción.</p></div>
+    <section style="padding:5rem 1.5rem;">
+        <div class="section-inner">
+            <div class="animate-right"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Por qué elegirnos</span></div>
+            <h2 class="animate-right delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 2rem;">
+                Tu mejor opción<br>para <span class="shimmer-text">crecer digital</span>
+            </h2>
+            <div class="grid-why">
+                <div class="why-card animate-scale delay-100"><div style="font-size:2rem; margin-bottom:1rem;">💰</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Precios Accesibles</h3><p style="font-size:0.85rem; color:var(--text-dim);">Soluciones profesionales al alcance de cualquier negocio. Desde $170.000 COP.</p></div>
+                <div class="why-card animate-scale delay-200"><div style="font-size:2rem; margin-bottom:1rem;">🤝</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Atención Personalizada</h3><p style="font-size:0.85rem; color:var(--text-dim);">Cada proyecto es único. Te acompañamos en cada paso del proceso.</p></div>
+                <div class="why-card animate-scale delay-300"><div style="font-size:2rem; margin-bottom:1rem;">👨‍💻</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Equipo Multidisciplinario</h3><p style="font-size:0.85rem; color:var(--text-dim);">Desarrolladores, diseñadores y analistas trabajando juntos.</p></div>
+                <div class="why-card animate-scale delay-400"><div style="font-size:2rem; margin-bottom:1rem;">🚀</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Soluciones Reales</h3><p style="font-size:0.85rem; color:var(--text-dim);">Entregamos productos funcionales listos para producción.</p></div>
             </div>
         </div>
     </section>
@@ -661,17 +356,19 @@
     <div class="section-divider"></div>
 
     <!-- SERVICIOS -->
-    <section id="servicios" style="padding: 5rem 1.5rem;">
-        <div style="max-width: 1024px; margin: 0 auto;">
-            <div class="animate-left"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Servicios</span></div>
-            <h2 class="animate-left delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 2rem;">Lo que <span class="shimmer-text">hacemos</span></h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-                <div class="service-card animate-up delay-100"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">🌐</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Páginas Web</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Landing pages, sitios corporativos, tiendas online con diseño profesional.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">6h — 6 días</div></div>
-                <div class="service-card animate-up delay-150"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">📱</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Apps Móviles</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Aplicaciones nativas y multiplataforma con dashboard y soporte incluido.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">15 — 20 días</div></div>
-                <div class="service-card animate-up delay-200"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">🎨</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Diseño UX/UI</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Interfaces intuitivas, branding y diseño gráfico que enamoran usuarios.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">Personalizado</div></div>
-                <div class="service-card animate-up delay-250"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">🤖</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Automatización</h3><p style="font-size: 0.85rem; color: var(--text-dim);">WhatsApp Business, bots, flujos automáticos para optimizar tu operación.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">Incluido</div></div>
-                <div class="service-card animate-up delay-300"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">📖</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Catálogos Digitales</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Menús y catálogos interactivos para restaurantes y tiendas.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">Rápido</div></div>
-                <div class="service-card animate-up delay-350"><div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.5rem;">📊</div><h3 style="font-weight: 700; margin-bottom: 0.5rem;">Análisis de Datos</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Dashboards, reportes e insights para decisiones basadas en datos.</p><div style="margin-top: 1rem; font-size: 0.7rem; font-family: monospace; color: var(--green);">Personalizado</div></div>
+    <section id="servicios" style="padding:5rem 1.5rem;">
+        <div class="section-inner">
+            <div class="animate-left"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Servicios</span></div>
+            <h2 class="animate-left delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 2rem;">
+                Lo que <span class="shimmer-text">hacemos</span>
+            </h2>
+            <div class="grid-services">
+                <div class="service-card animate-up delay-100"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">🌐</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Páginas Web</h3><p style="font-size:0.85rem; color:var(--text-dim);">Landing pages, sitios corporativos, tiendas online con diseño profesional.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">6h — 6 días</div></div>
+                <div class="service-card animate-up delay-150"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">📱</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Apps Móviles</h3><p style="font-size:0.85rem; color:var(--text-dim);">Aplicaciones nativas y multiplataforma con dashboard y soporte incluido.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">15 — 20 días</div></div>
+                <div class="service-card animate-up delay-200"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">🎨</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Diseño UX/UI</h3><p style="font-size:0.85rem; color:var(--text-dim);">Interfaces intuitivas, branding y diseño gráfico que enamoran usuarios.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">Personalizado</div></div>
+                <div class="service-card animate-up delay-250"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">🤖</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Automatización</h3><p style="font-size:0.85rem; color:var(--text-dim);">WhatsApp Business, bots, flujos automáticos para optimizar tu operación.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">Incluido</div></div>
+                <div class="service-card animate-up delay-300"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">📖</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Catálogos Digitales</h3><p style="font-size:0.85rem; color:var(--text-dim);">Menús y catálogos interactivos para restaurantes y tiendas.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">Rápido</div></div>
+                <div class="service-card animate-up delay-350"><div style="width:48px; height:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.5rem;">📊</div><h3 style="font-weight:700; margin-bottom:0.5rem;">Análisis de Datos</h3><p style="font-size:0.85rem; color:var(--text-dim);">Dashboards, reportes e insights para decisiones basadas en datos.</p><div style="margin-top:1rem; font-size:0.7rem; font-family:monospace; color:var(--green);">Personalizado</div></div>
             </div>
         </div>
     </section>
@@ -679,45 +376,133 @@
     <div class="section-divider"></div>
 
     <!-- PROCESO -->
-    <section style="padding: 5rem 1.5rem;">
-        <div style="max-width: 896px; margin: 0 auto;">
-            <div class="animate-right"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Proceso</span></div>
-            <h2 class="animate-right delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 2rem;">Así <span class="shimmer-text">trabajamos</span></h2>
+    <section style="padding:5rem 1.5rem;">
+      <div class="fondo" style="position:relative;">
+    <img src="./fondo.svg" 
+         style="
+            height: 120vh; 
+            width: 120vw; 
+            position: absolute; 
+            top: -10vh; 
+            left: 0; 
+            z-index: -1;
+            filter: blur(5px) brightness(0.2);
+            
+         " 
+         alt="Fondo">
+        <div class="section-inner-sm">
+            <div class="animate-right"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Proceso</span></div>
+            <h2 class="animate-right delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 2rem;">
+                Así <span class="shimmer-text">trabajamos</span>
+            </h2>
             <div>
-                <div class="process-step animate-left delay-100" data-step="01"><h3 style="font-weight: 700; margin-bottom: 0.25rem;">Contacto Inicial</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Nos cuentas tu idea o necesidad. Escuchamos y entendemos tu visión.</p></div>
-                <div class="process-step animate-left delay-150" data-step="02"><h3 style="font-weight: 700; margin-bottom: 0.25rem;">Análisis</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Evaluamos la viabilidad y definimos el alcance del proyecto.</p></div>
-                <div class="process-step animate-left delay-200" data-step="03"><h3 style="font-weight: 700; margin-bottom: 0.25rem;">Propuesta</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Te presentamos el plan, tiempos y costos. Sin sorpresas.</p></div>
-                <div class="process-step animate-left delay-250" data-step="04"><h3 style="font-weight: 700; margin-bottom: 0.25rem;">Desarrollo</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Construimos tu solución con las mejores tecnologías del mercado.</p></div>
-                <div class="process-step animate-left delay-300" data-step="05"><h3 style="font-weight: 700; margin-bottom: 0.25rem;">Entrega</h3><p style="font-size: 0.85rem; color: var(--text-dim);">Publicamos y entregamos tu producto listo para el mundo.</p></div>
+                <div class="process-step animate-left delay-100" data-step="01"><h3 style="font-weight:700; margin-bottom:0.25rem;">Contacto Inicial</h3><p style="font-size:0.85rem; color:var(--text-dim);">Nos cuentas tu idea o necesidad. Escuchamos y entendemos tu visión.</p></div>
+                <div class="process-step animate-left delay-150" data-step="02"><h3 style="font-weight:700; margin-bottom:0.25rem;">Análisis</h3><p style="font-size:0.85rem; color:var(--text-dim);">Evaluamos la viabilidad y definimos el alcance del proyecto.</p></div>
+                <div class="process-step animate-left delay-200" data-step="03"><h3 style="font-weight:700; margin-bottom:0.25rem;">Propuesta</h3><p style="font-size:0.85rem; color:var(--text-dim);">Te presentamos el plan, tiempos y costos. Sin sorpresas.</p></div>
+                <div class="process-step animate-left delay-250" data-step="04"><h3 style="font-weight:700; margin-bottom:0.25rem;">Desarrollo</h3><p style="font-size:0.85rem; color:var(--text-dim);">Construimos tu solución con las mejores tecnologías del mercado.</p></div>
+                <div class="process-step animate-left delay-300" data-step="05"><h3 style="font-weight:700; margin-bottom:0.25rem;">Entrega</h3><p style="font-size:0.85rem; color:var(--text-dim);">Publicamos y entregamos tu producto listo para el mundo.</p></div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PLANES: PAGO ÚNICO -->
+    <section id="planes" style="padding:5rem 1.5rem;">
+        <div class="section-inner">
+            <div class="animate-up"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Planes & Precios Únicos</span></div>
+            <h2 class="animate-up delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 0.5rem;">
+                Invierte en tu <span class="shimmer-text">crecimiento a un solo pago</span>
+            </h2>
+            <p class="animate-up delay-150" style="margin-bottom:2rem; color:var(--text-dim);">Precios en COP. Todos los planes incluyen soporte y acompañamiento.</p>
+            <div class="grid-pricing">
+                <div class="pricing-card animate-scale delay-100">
+                    <div style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem;">Básico</div>
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--green);">$170k</div>
+                    <div style="font-size:0.7rem; margin-bottom:1rem; color:var(--text-dim);">COP / proyecto</div>
+                    <ul style="list-style:none; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.5rem;">✓ Página web profesional</li>
+                        <li style="margin-bottom:0.5rem;">✓ Dominio gratuito</li>
+                        <li style="margin-bottom:0.5rem;">✓ Automatización básica</li>
+                        <li>✓ Diseño responsive</li>
+                    </ul>
+                    <a href="#contacto" class="btn-outline" style="display:block; text-align:center; padding:0.7rem;">Comenzar →</a>
+                </div>
+                <div class="pricing-card featured animate-scale delay-200">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <div style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">Premium</div>
+                        <span style="font-size:0.6rem; font-weight:bold; padding:0.2rem 0.7rem; border-radius:9999px; background:var(--green); color:var(--bg);">Popular</span>
+                    </div>
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--green);">$400k</div>
+                    <div style="font-size:0.7rem; margin-bottom:1rem; color:var(--text-dim);">COP / proyecto</div>
+                    <ul style="list-style:none; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.5rem;">✓ Todo del plan Básico</li>
+                        <li style="margin-bottom:0.5rem;">✓ Dominio .com o .co</li>
+                        <li style="margin-bottom:0.5rem;">✓ Web con carrito</li>
+                        <li>✓ Mejor posicionamiento SEO</li>
+                    </ul>
+                    <a href="#contacto" class="btn-primary" style="display:block; text-align:center; padding:0.7rem;">Elegir plan →</a>
+                </div>
+                <div class="pricing-card animate-scale delay-300">
+                    <div style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem;">Apps Móviles</div>
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--green);">$500k</div>
+                    <div style="font-size:0.7rem; margin-bottom:1rem; color:var(--text-dim);">COP / desde</div>
+                    <ul style="list-style:none; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.5rem;">✓ App iOS y Android</li>
+                        <li style="margin-bottom:0.5rem;">✓ Dashboard admin</li>
+                        <li style="margin-bottom:0.5rem;">✓ Soporte incluido</li>
+                        <li>✓ Hasta $2.200.000</li>
+                    </ul>
+                    <a href="#contacto" class="btn-outline" style="display:block; text-align:center; padding:0.7rem;">Cotizar →</a>
+                </div>
+            </div>
+            <div class="animate-up delay-400" style="margin-top:2rem; padding:1rem; border-radius:0.75rem; background:var(--surface); border:1px solid rgba(13,159,76,0.1);">
+                <p style="font-size:0.8rem; color:var(--text-dim);"><strong style="color:white;">ℹ️ Sobre dominios:</strong> Gratuito (menos posicionamiento) o Premium .com/.co (mayor visibilidad, costo adicional anual).</p>
             </div>
         </div>
     </section>
 
     <div class="section-divider"></div>
 
-    <!-- PLANES -->
-    <section id="planes" style="padding: 5rem 1.5rem;">
-        <div style="max-width: 1024px; margin: 0 auto;">
-            <div class="animate-up"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Planes & Precios Unicos</span></div>
-            <h2 class="animate-up delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 0.5rem;">Invierte en tu <span class="shimmer-text">crecimiento a un solo pago</span></h2>
-            <p class="animate-up delay-150" style="margin-bottom: 2rem; color: var(--text-dim);">Precios en COP. Todos los planes incluyen soporte y acompañamiento.</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <div class="pricing-card animate-scale delay-100"><div style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">Básico</div><div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">$170k</div><div style="font-size: 0.7rem; margin-bottom: 1rem; color: var(--text-dim);">COP / proyecto</div><ul style="list-style: none; margin-bottom: 1.5rem;"><li style="margin-bottom: 0.5rem;">✓ Página web profesional</li><li style="margin-bottom: 0.5rem;">✓ Dominio gratuito</li><li style="margin-bottom: 0.5rem;">✓ Automatización básica</li><li>✓ Diseño responsive</li></ul><a href="#contacto" class="btn-outline" style="display: block; text-align: center; padding: 0.7rem;">Comenzar →</a></div>
-                <div class="pricing-card featured animate-scale delay-200"><div style="display: flex; justify-content: space-between; margin-bottom: 1rem;"><div style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">Premium</div><span style="font-size: 0.6rem; font-weight: bold; padding: 0.2rem 0.7rem; border-radius: 9999px; background: var(--green); color: var(--bg);">Popular</span></div><div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">$400k</div><div style="font-size: 0.7rem; margin-bottom: 1rem; color: var(--text-dim);">COP / proyecto</div><ul style="list-style: none; margin-bottom: 1.5rem;"><li style="margin-bottom: 0.5rem;">✓ Todo del plan Básico</li><li style="margin-bottom: 0.5rem;">✓ Dominio .com o .co</li><li style="margin-bottom: 0.5rem;">✓ Web con carrito</li><li>✓ Mejor posicionamiento SEO</li></ul><a href="#contacto" class="btn-primary" style="display: block; text-align: center; padding: 0.7rem;">Elegir plan →</a></div>
-                <div class="pricing-card animate-scale delay-300"><div style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">Apps Móviles</div><div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">$500k</div><div style="font-size: 0.7rem; margin-bottom: 1rem; color: var(--text-dim);">COP / desde</div><ul style="list-style: none; margin-bottom: 1.5rem;"><li style="margin-bottom: 0.5rem;">✓ App iOS y Android</li><li style="margin-bottom: 0.5rem;">✓ Dashboard admin</li><li style="margin-bottom: 0.5rem;">✓ Soporte incluido</li><li>✓ Hasta $2.200.000</li></ul><a href="#contacto" class="btn-outline" style="display: block; text-align: center; padding: 0.7rem;">Cotizar →</a></div>
-            </div>
-            <div class="animate-up delay-400" style="margin-top: 2rem; padding: 1rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid rgba(13, 159, 76, 0.1);">
-                <p style="font-size: 0.8rem; color: var(--text-dim);"><strong style="color: white;">ℹ️ Sobre dominios:</strong> Gratuito (menos posicionamiento) o Premium .com/.co (mayor visibilidad, costo adicional anual).</p>
-            </div>
-            <!-- PLANES -->
-    <section id="planes" style="padding: 5rem 1.5rem;">
-        <div style="max-width: 1024px; margin: 0 auto;">
-            <div class="animate-up"><span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Planes & Precios Mensuales</span></div>
-            <h2 class="animate-up delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 0.5rem;">Invierte en tu <span class="shimmer-text">Empresa / Restaurante Mensual</span></h2>
-            <p class="animate-up delay-150" style="margin-bottom: 2rem; color: var(--text-dim);">Precios en COP. Todos los planes incluyen soporte y acompañamiento.</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <div class="pricing-card animate-scale delay-100"><div style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1rem;">Básico</div><div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">$100k</div><div style="font-size: 0.7rem; margin-bottom: 1rem; color: var(--text-dim);">COP / proyecto + Publicidad</div><ul style="list-style: none; margin-bottom: 1.5rem;"><li style="margin-bottom: 0.5rem;">✓ Página web profesional</li><li style="margin-bottom: 0.5rem;">✓ Dominio Premiun con certificado</li><li style="margin-bottom: 0.5rem;">✓ Automatización básica</li><li>✓ Diseño responsive</li><li>✓ 4 Publicaciones mensuales PNG (3 imagen y 1 reel)</li></ul><a href="#contacto" class="btn-outline" style="display: block; text-align: center; padding: 0.7rem;">Comenzar →</a></div>
-                <div class="pricing-card featured animate-scale delay-200"><div style="display: flex; justify-content: space-between; margin-bottom: 1rem;"><div style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">Premium</div><span style="font-size: 0.6rem; font-weight: bold; padding: 0.2rem 0.7rem; border-radius: 9999px; background: var(--green); color: var(--bg);">Popular</span></div><div style="font-size: 2.2rem; font-weight: 900; color: var(--green);">$400k</div><div style="font-size: 0.7rem; margin-bottom: 1rem; color: var(--text-dim);">COP / proyecto</div><ul style="list-style: none; margin-bottom: 1.5rem;"><li style="margin-bottom: 0.5rem;">✓ Todo del plan Básico</li><li style="margin-bottom: 0.5rem;">✓ Dominio .com o .co</li><li style="margin-bottom: 0.5rem;">✓ Web con carrito</li><li>✓ Mejor posicionamiento SEO</li><li></li><li>✓ suministramos ayuda en canales de redes sociales, subiendo publicaciones y creando flayers para tu negocio por (24 horas mensuales) </li><li></li></ul><a href="#contacto" class="btn-primary" style="display: block; text-align: center; padding: 0.7rem;">Elegir plan →</a></div>
+    <!-- PLANES: MENSUAL -->
+    <section style="padding:5rem 1.5rem;">
+        <div class="section-inner">
+            <div class="animate-up"><span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Planes & Precios Mensuales</span></div>
+            <h2 class="animate-up delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 0.5rem;">
+                Invierte en tu <span class="shimmer-text">Empresa / Restaurante Mensual</span>
+            </h2>
+            <p class="animate-up delay-150" style="margin-bottom:2rem; color:var(--text-dim);">Precios en COP. Todos los planes incluyen soporte y acompañamiento.</p>
+            <div class="grid-pricing">
+                <div class="pricing-card animate-scale delay-100">
+                    <div style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:1rem;">Básico</div>
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--green);">$100k</div>
+                    <div style="font-size:0.7rem; margin-bottom:1rem; color:var(--text-dim);">COP / mes + Publicidad</div>
+                    <ul style="list-style:none; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.5rem;">✓ Página web profesional</li>
+                        <li style="margin-bottom:0.5rem;">✓ Dominio Premium con certificado</li>
+                        <li style="margin-bottom:0.5rem;">✓ Automatización básica</li>
+                        <li style="margin-bottom:0.5rem;">✓ Diseño responsive</li>
+                        <li>✓ 4 Publicaciones mensuales (3 imagen + 1 reel)</li>
+                    </ul>
+                    <a href="#contacto" class="btn-outline" style="display:block; text-align:center; padding:0.7rem;">Comenzar →</a>
+                </div>
+                <div class="pricing-card featured animate-scale delay-200">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <div style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">Premium</div>
+                        <span style="font-size:0.6rem; font-weight:bold; padding:0.2rem 0.7rem; border-radius:9999px; background:var(--green); color:var(--bg);">Popular</span>
+                    </div>
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--green);">$400k</div>
+                    <div style="font-size:0.7rem; margin-bottom:1rem; color:var(--text-dim);">COP / mes</div>
+                    <ul style="list-style:none; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.5rem;">✓ Todo del plan Básico</li>
+                        <li style="margin-bottom:0.5rem;">✓ Dominio .com o .co</li>
+                        <li style="margin-bottom:0.5rem;">✓ Web con carrito</li>
+                        <li style="margin-bottom:0.5rem;">✓ Mejor posicionamiento SEO</li>
+                        <li>✓ Gestión de redes sociales (24h mensuales de publicaciones y flyers)</li>
+                    </ul>
+                    <a href="#contacto" class="btn-primary" style="display:block; text-align:center; padding:0.7rem;">Elegir plan →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -725,179 +510,114 @@
     <div class="section-divider"></div>
 
     <!-- CONTACTO -->
-    <section id="contacto" style="padding: 5rem 1.5rem; background: radial-gradient(ellipse at center, rgba(13, 159, 76, 0.05), transparent);">
-    <div style="max-width: 896px; margin: 0 auto;">
-        
-        <div class="animate-up" style="text-align: center;">
-            <span style="font-size: 0.7rem; font-family: monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green);">// Contacto</span>
-        </div>
-        <h2 class="animate-up delay-100" style="font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; margin: 1rem 0 0.5rem; text-align: center;">
-            Hablemos de tu <span class="shimmer-text">proyecto</span>
-        </h2>
-        <p class="animate-up delay-150" style="margin-bottom: 2rem; text-align: center; color: var(--text-dim);">
-            Estamos listos para convertir tu idea en realidad.
-        </p>
-
-        <div class="animate-up delay-200" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid rgba(13, 159, 76, 0.1);">
-                <div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📧</div>
-                <div>
-                    <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Email</div>
-                    <div style="font-size: 0.85rem;">vantage.portfolios@proton.me</div>
-                </div>
+    <section id="contacto" style="padding:5rem 1.5rem; background:radial-gradient(ellipse at center,rgba(13,159,76,0.05),transparent);">
+        <div class="section-inner-sm">
+            <div class="animate-up" style="text-align:center;">
+                <span style="font-size:0.7rem; font-family:monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--green);">// Contacto</span>
             </div>
-            
-            <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 0.75rem; background: var(--surface); border: 1px solid rgba(13, 159, 76, 0.1);">
-                <div style="width: 48px; height: 48px; background: rgba(13, 159, 76, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">🌐</div>
-                <div>
-                    <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim);">Web</div>
-                    <a href="https://vantagecolombia.github.io/Vantage"_blank" style="font-size: 0.85rem; color: var(--green); text-decoration: none;">vantagecolombia.com</a>
-                </div>
-            </div>
-        </div>
+            <h2 class="animate-up delay-100" style="font-size:clamp(1.7rem,5.5vw,3rem); font-weight:900; margin:1rem 0 0.5rem; text-align:center;">
+                Hablemos de tu <span class="shimmer-text">proyecto</span>
+            </h2>
+            <p class="animate-up delay-150" style="margin-bottom:2rem; text-align:center; color:var(--text-dim);">Estamos listos para convertir tu idea en realidad.</p>
 
-        <div class="animate-scale delay-200" style="border-radius: 1rem; padding: 2rem; background: var(--surface); border: 1px solid rgba(13, 159, 76, 0.15);">
-            <div style="text-align: center; margin-bottom: 2rem;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">👨‍💻 Líderes Encargados</h3>
-                <p style="font-size: 0.9rem; color: var(--text-dim);">Comunícate directamente con nuestro equipo de desarrollo.</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                
-                <div style="padding: 1.5rem; border-radius: 0.75rem; background: rgba(13, 159, 76, 0.05); border: 1px solid rgba(13, 159, 76, 0.1); text-align: center;">
-                    <p style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.2rem;">Jhon Fredi Pico Sanchez</p>
-                    <p style="font-size: 0.8rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold; margin-bottom: 1.5rem;">Desarrollador FullStack / Analista de datos & QA</p>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
-                        <a href="https://wa.me/573194726442" target="_blank" class="btn-primary" style="display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; font-size: 0.85rem; text-decoration: none; border-radius: 0.5rem; width: 100%; max-width: 250px;">
-                            💬 WA: 319 472 6442
-                        </a>
-                        <a href="https://wa.me/573107577205" target="_blank" class="btn-primary" style="display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; font-size: 0.85rem; text-decoration: none; border-radius: 0.5rem; width: 100%; max-width: 250px;">
-                            💬 WA: 310 757 7205
-                        </a>
+            <div class="animate-up delay-200 grid-contact" style="margin-bottom:2rem;">
+                <div style="display:flex; align-items:center; gap:1rem; padding:1rem; border-radius:0.75rem; background:var(--surface); border:1px solid rgba(13,159,76,0.1);">
+                    <div style="width:48px; height:48px; min-width:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">📧</div>
+                    <div style="overflow:hidden;">
+                        <div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Email</div>
+                        <div style="font-size:0.85rem; word-break:break-all;">vantage.portfolios@proton.me</div>
                     </div>
                 </div>
-
-                <div style="padding: 1.5rem; border-radius: 0.75rem; background: rgba(13, 159, 76, 0.05); border: 1px solid rgba(13, 159, 76, 0.1); text-align: center;">
-                    <p style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.2rem;">Jhonatan Zapata</p>
-                    <p style="font-size: 0.8rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold; margin-bottom: 1.5rem;">Desarrollador FullStack / Diseñador UX IU</p>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center;">
-                        <a href="https://wa.me/573112850161" target="_blank" class="btn-primary" style="display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; font-size: 0.85rem; text-decoration: none; border-radius: 0.5rem; width: 100%; max-width: 250px;">
-                            💬 WA: 311 285 0161
-                        </a>
+                <div style="display:flex; align-items:center; gap:1rem; padding:1rem; border-radius:0.75rem; background:var(--surface); border:1px solid rgba(13,159,76,0.1);">
+                    <div style="width:48px; height:48px; min-width:48px; background:rgba(13,159,76,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">🌐</div>
+                    <div>
+                        <div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-dim);">Web</div>
+                        <a href="https://vantagecolombia.github.io/Vantage" target="_blank" style="font-size:0.85rem; color:var(--green); text-decoration:none;">vantagecolombia.com</a>
                     </div>
                 </div>
+            </div>
 
+            <div class="animate-scale delay-200" style="border-radius:1rem; padding:2rem; background:var(--surface); border:1px solid rgba(13,159,76,0.15);">
+                <div style="text-align:center; margin-bottom:2rem;">
+                    <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:0.5rem;">👨‍💻 Líderes Encargados</h3>
+                    <p style="font-size:0.9rem; color:var(--text-dim);">Comunícate directamente con nuestro equipo de desarrollo.</p>
+                </div>
+                <div class="grid-leaders">
+                    <div style="padding:1.5rem; border-radius:0.75rem; background:rgba(13,159,76,0.05); border:1px solid rgba(13,159,76,0.1); text-align:center;">
+                        <p style="font-size:1.05rem; font-weight:800; margin-bottom:0.2rem;">Jhon Fredi Pico Sanchez</p>
+                        <p style="font-size:0.75rem; color:var(--green); text-transform:uppercase; letter-spacing:0.05em; font-weight:bold; margin-bottom:1.5rem;">Desarrollador FullStack / Analista de datos & QA</p>
+                        <div class="contact-links">
+                            <a href="https://wa.me/573194726442" target="_blank" class="btn-primary">💬 WA: 319 472 6442</a>
+                            <a href="https://wa.me/573107577205" target="_blank" class="btn-primary">💬 WA: 310 757 7205</a>
+                        </div>
+                    </div>
+                    <div style="padding:1.5rem; border-radius:0.75rem; background:rgba(13,159,76,0.05); border:1px solid rgba(13,159,76,0.1); text-align:center;">
+                        <p style="font-size:1.05rem; font-weight:800; margin-bottom:0.2rem;">Jhonatan Zapata</p>
+                        <p style="font-size:0.75rem; color:var(--green); text-transform:uppercase; letter-spacing:0.05em; font-weight:bold; margin-bottom:1.5rem;">Desarrollador FullStack / Diseñador UX UI</p>
+                        <div class="contact-links">
+                            <a href="https://wa.me/573112850161" target="_blank" class="btn-primary">💬 WA: 311 285 0161</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
-</section>
-
-<footer style="padding: 2rem 1.5rem; border-top: 1px solid rgba(13, 159, 76, 0.1); text-align: center;">
-    <div style="max-width: 1024px; margin: 0 auto;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem;">
-            <div style="width: 50px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                <img style="width: 100px; height: 100%; object-fit: contain;" src="https://vantagecolombia.github.io/Vantage/logo.png" alt="Vantage Logo">
+    <!-- FOOTER -->
+    <footer style="padding:2rem 1.5rem; border-top:1px solid rgba(13,159,76,0.1); text-align:center;">
+        <div style="max-width:1024px; margin:0 auto;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:0.75rem; margin-bottom:1rem;">
+                <img style="width:100px; height:auto; object-fit:contain;" src="./logo.png" alt="Vantage Colombia">
             </div>
+            <p style="font-size:0.7rem; color:var(--text-dim);">© 2026 Vantage Colombia. Todos los derechos reservados.</p>
         </div>
-        <p style="font-size: 0.7rem; color: var(--text-dim);">© 2026 Vantage Colombia. Todos los derechos reservados.</p>
-    </div>
-</footer>
-
-    <style>
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-    </style>
+    </footer>
 
     <script>
-        // NAVBAR SCROLL EFFECT
+        // Navbar scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
 
-        // MOBILE MENU
-        const menuBtn = document.getElementById('menuBtn');
+        // Mobile menu
+        const menuBtn   = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        const overlay = document.getElementById('overlay');
+        const closeMenu  = document.getElementById('closeMenu');
+        const overlay    = document.getElementById('overlay');
 
-        function openMobileMenu() {
-            mobileMenu.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        function openMenu()  { mobileMenu.classList.add('open');    overlay.classList.add('active');    document.body.style.overflow='hidden'; }
+        function closeMenuFn(){ mobileMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow=''; }
 
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+        menuBtn.addEventListener('click', openMenu);
+        closeMenu.addEventListener('click', closeMenuFn);
+        overlay.addEventListener('click', closeMenuFn);
+        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', closeMenuFn));
 
-        if (menuBtn) menuBtn.addEventListener('click', openMobileMenu);
-        if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
-        if (overlay) overlay.addEventListener('click', closeMobileMenu);
-
-        // Cerrar mobile menu al hacer click en un enlace
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // MARQUEE INFINITO
+        // Marquee duplicate
         const marquee = document.getElementById('marquee');
-        if (marquee) {
-            const content = marquee.innerHTML;
-            marquee.innerHTML = content + content;
-        }
+        if (marquee) marquee.innerHTML += marquee.innerHTML;
 
-        // SMOOTH SCROLL para todos los enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const target = document.querySelector(targetId);
-                if (target) {
-                    const offset = 80;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                }
+                const id = a.getAttribute('href');
+                if (id === '#') return;
+                const el = document.querySelector(id);
+                if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
             });
         });
 
-        // ANIMACIONES AL HACER SCROLL (Intersection Observer)
-        const animatedElements = document.querySelectorAll('.animate-up, .animate-left, .animate-right, .animate-scale');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    observer.unobserve(entry.target);
-                }
-            });
+        // Scroll animations
+        const animated = document.querySelectorAll('.animate-up,.animate-left,.animate-right,.animate-scale');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; obs.unobserve(e.target); } });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        animated.forEach(el => { el.style.opacity='0'; obs.observe(el); });
 
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
-
-        // Forzar que los elementos con delay mantengan opacidad después de animar
-        setTimeout(() => {
-            animatedElements.forEach(el => {
-                if (getComputedStyle(el).opacity === '0') {
-                    el.style.opacity = '1';
-                }
-            });
-        }, 2000);
+        // Fallback
+        setTimeout(() => { animated.forEach(el => { if (el.style.opacity==='0') el.style.opacity='1'; }); }, 2500);
     </script>
 </body>
 </html>
